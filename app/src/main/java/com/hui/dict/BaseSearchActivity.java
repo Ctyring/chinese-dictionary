@@ -50,6 +50,7 @@ public class BaseSearchActivity extends BaseActivity {
         titleTv = findViewById(R.id.searchpy_tv);
         // 初始化GriView的数据源内容
         initGridDatas();
+
     }
 
     /**

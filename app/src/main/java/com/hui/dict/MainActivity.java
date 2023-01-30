@@ -1,14 +1,22 @@
 package com.hui.dict;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     TextView pyTv,bsTv,cyuTv,twenTv,juziTv;
     EditText ziEt;
+    LinearLayout root;
     private boolean hasGotToken = false;
     private static final int REQUEST_CODE_GENERAL_BASIC = 106;
     private AlertDialog.Builder alertDialog;
@@ -39,6 +48,20 @@ public class MainActivity extends AppCompatActivity {
         initView();
         alertDialog = new AlertDialog.Builder(this);
         initAccessTokenWithAkSk();
+        root.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(v.getId() != R.id.main_et){
+                    root.setFocusable(true);
+                    root.setFocusableInTouchMode(true);
+                    root.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(ziEt.getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
     }
 
     private boolean checkTokenStatus() {
@@ -133,11 +156,21 @@ public class MainActivity extends AppCompatActivity {
         twenTv = findViewById(R.id.main_tv_tuwen);
         juziTv = findViewById(R.id.main_tv_juzi);
         ziEt = findViewById(R.id.main_et);
+        root = findViewById(R.id.root);
+
+        root.setFocusable(true);
+        root.setFocusableInTouchMode(true);
+        root.requestFocus();
     }
 
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.main_et:
+                ziEt.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(ziEt, InputMethodManager.SHOW_IMPLICIT);
+                break;
             case R.id.main_iv_setting:
                 intent.setClass(this,SettingActivity.class);
                 startActivity(intent);
