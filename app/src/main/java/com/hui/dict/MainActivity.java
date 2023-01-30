@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.main_iv_search:
                 String text = ziEt.getText().toString();
-                if (!TextUtils.isEmpty(text)) {
+                if (!TextUtils.isEmpty(text) && text.length() == 1) {
                     intent.setClass(this,WordInfoActivity.class);
                     intent.putExtra("zi",text);
                     startActivity(intent);

@@ -95,8 +95,8 @@ public class SearchLeftAdapter extends BaseExpandableListAdapter {
 
 //        因为选中位置会改变颜色，和其他布局颜色不同，所以判断一下，是否是选中位置
         if (selectGroupPos == groupPosition) {
-            convertView.setBackgroundColor(Color.BLACK);
-            holder.groupTv.setTextColor(Color.RED);
+            convertView.setBackgroundResource(R.color.qunqing);
+            holder.groupTv.setTextColor(Color.WHITE);
         }else{
             convertView.setBackgroundResource(R.color.grey_f3f3f3);
             holder.groupTv.setTextColor(Color.BLACK);

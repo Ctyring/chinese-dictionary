@@ -10,7 +10,7 @@
         android:text="啊"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/red"
+        android:textColor="@color/mangconglv"
         android:textSize="30sp"
         android:background="@drawable/search_tv_bg"/>
 </LinearLayout>
