@@ -1,4 +1,4 @@
-package com.hui.dict;
+package com.cty.dict;
 
 import org.junit.Test;
 
